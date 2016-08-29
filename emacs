@@ -1,6 +1,3 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; OS INTEGRATION
-;;(let ((default-directory "/Volumes/homes/ep/Library/Application Support/emacs/site-lisp/"))
-;;  (normal-top-level-add-subdirs-to-load-path))
 ;; use MELPA packages
 (cond
      ((string-match "Emacs 24" (emacs-version))
