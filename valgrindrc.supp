@@ -1,0 +1,203 @@
+{
+   <cmsMallocZeroDefaultFn>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:_cmsMallocZeroDefaultFn
+}
+{
+   <cmsWriteTag>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:SetTextTags
+}
+{
+   <cmsCreateProfilePlaceHolder1>
+   Memcheck:Leak
+   match-leak-kinds: definite
+   ...
+   fun:cmsCreateProfilePlaceholder
+}
+{
+   <cmsCreateProfilePlaceHolder2>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:cmsCreateProfilePlaceholder
+}
+{
+   <fetchInitializingClassLista1>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:calloc
+   ...
+   fun:lookUpImpOrForward
+   ...
+   fun:bootstrap_look_up2
+}
+{
+   <fetchInitializingClassLista2>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   ...
+   fun:lookUpImpOrForward
+}
+{
+   <setlocale>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:setlocale
+   fun:main
+}
+{
+   <setlocalerealloc>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:realloc
+   ...
+   fun:setlocale
+   fun:main
+}
+{
+   <currentlocale>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:currentlocale
+   fun:main
+}
+{
+   <currentlocaledef>
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:currentlocale
+   fun:main
+}
+{
+   <cmsDupDefaultFn>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:_cmsDupDefaultFn
+}
+{
+   <allocbuckets>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   ...
+   fun:_dispatch_client_callout
+}
+{
+   <removeassoc>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_object_remove_assocations
+   ...
+   fun:dispatch_once_f
+}
+{
+   <exceptions>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:atexit_register
+   fun:__cxa_atexit
+}
+{
+   <removeassoc>
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   ...
+   fun:bootstrap_look_up3
+}
+{
+   FontSetCre
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:FcConfigSubstituteWithPat
+}
+{
+   FcStrSetAdd
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   fun:FcStrSetAdd
+}
+{
+   FcStrSetAddRealloc
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:realloc
+   ...
+   fun:FcStrSetAdd
+}
+{
+   GetDefLang
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   fun:FcGetDefaultLang
+}
+{
+   FcGetPrgname
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   fun:FcGetPrgname
+}
+{
+   FcPopExpr
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:strdup
+   fun:FcPopExpr
+}
+{
+   FcInitLoadOwn
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:FcInitLoadOwnConfig
+}
+{
+   FCConfigParseandload
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   fun:FcConfigParseAndLoad
+}
+{
+   FCConfigParseandloadRealloc
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:realloc
+   ...
+   fun:FcConfigParseAndLoad
+}
+{
+   FCConfigSubs
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:realloc
+   ...
+   fun:FcConfigSubstituteWithPat
+}

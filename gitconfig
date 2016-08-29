@@ -1,0 +1,32 @@
+[core]
+	excludesfile = ~/.gitignore_global
+[color]
+        diff = auto
+        status = auto
+        branch = auto
+[color "status"]
+        added = cyan
+        untracked = red
+        changed = green
+[commit]
+	template = ~/.stCommitMsg
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[push]
+	default = simple
+[user]
+	name = Ed Porras
+	email = ed@motologic.com
+[status]
+        short = true
+        branch = true
+[alias]
+        st = status
+        co = checkout
+        ci = commit
+        diffs = diff --stat
+        search = log -S
