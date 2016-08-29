@@ -35,7 +35,6 @@
 
     ;; window size
     (setq default-frame-alist '((width . 105) (height . 60) (menu-bar-lines . 2)))
-    (add-to-list 'default-frame-alist '(cursor-color . "palegoldenrod"))
 ;;    (set-frame-parameter nil 'fullscreen 'fullboth)
 ;;    (require 'frame-cmds)
 
@@ -66,7 +65,11 @@
     ;; default path to find files
     (setq default-directory (concat (getenv "HOME") "/work/"))
     )
+(defun on-after-init ()
+  (unless (display-graphic-p (selected-frame))
+    (set-face-background 'default "black" (selected-frame))))
 
+(add-hook 'window-setup-hook 'on-after-init)
 ;; shortcut
 (defalias 'yes-or-no-p 'y-or-n-p)
 ;; turn off splash screen messages
@@ -75,9 +78,6 @@
 ;; Show me empty lines after buffer end
 (set-default 'indicate-empty-lines t)
 
-(add-to-list 'load-path (expand-file-name "~/Library/Application Support/emacs/site-lisp/pdf-mode"))
-;;(add-to-list 'load-path (expand-file-name "~ep/Library/Application Support/emacs/site-lisp/ruby-mode"))
-;;(add-to-list 'load-path (expand-file-name "~ep/Library/Application Support/emacs/site-lisp/"))
 (setq auto-mode-alist (append
 		       '(
                          ("\\.html$"  . sgml-mode)
@@ -87,7 +87,7 @@
 			 ("\\.h\\'"   . c++-mode)
 			 ("\\.ipp\\'" . c++-mode)
 			 ("\\.php\\'" . php-mode)
-			 ("\\.pdf\\'" . pdf-mode)
+;;			 ("\\.pdf\\'" . pdf-mode)
 			 ("\\.xml\\'" . xml-mode)
 			 ("\\.rb\\'"  . ruby-mode)
 			 ("\\.erb\\'" . ruby-mode)
@@ -152,8 +152,29 @@
 (define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
 (define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
 (define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
+;; git
+(autoload 'magit-status "magit" nil t)
+
+;; company-mode
+;;(require 'company)
+;;(add-hook 'after-init-hook 'global-company-mode)
+
+(require 'cc-mode)
+(require 'semantic)
+
 ;; my development mode
 (defun my-dev-mode-hook ()
+  (global-semanticdb-minor-mode 1)
+  (global-semantic-idle-scheduler-mode 1)
+  (semantic-mode 1)
+  (semantic-add-system-include "/usr/include/c++/4.2.1" 'c++-mode)
+
+;; (setq company-backends (delete 'company-semantic company-backends))
+;; (define-key c-mode-map  [(tab)] 'company-complete)
+;; (define-key c++-mode-map  [(tab)] 'company-complete)
+;; (add-to-list 'company-backends 'company-c-headers)
+;;  (add-to-list 'company-c-headers-path-system "/usr/include/c++/4.2.1/")
+
   ;; don't use tabs, really.. make them spaces
   (setq-default indent-tabs-mode nil)
   ;; enable Emacs Code Browser
@@ -168,37 +189,13 @@
 (define-key ctl-x-map "l" 'goto-line)
 ;; force comment colors
 (set-face-foreground 'font-lock-comment-face "#aaa")
+;; cursor color
+(add-to-list 'default-frame-alist '(cursor-color . "palegoldenrod"))
 ;; speedbar
 (require 'sr-speedbar)
 (global-set-key (kbd "s-s") 'sr-speedbar-toggle)
 ;; tramp
 (require 'tramp)
-;; to control how to split windows
-(defun toggle-window-split ()
-  (interactive)
-  (if (= (count-windows) 2)
-      (let* ((this-win-buffer (window-buffer))
-	     (next-win-buffer (window-buffer (next-window)))
-	     (this-win-edges (window-edges (selected-window)))
-	     (next-win-edges (window-edges (next-window)))
-	     (this-win-2nd (not (and (<= (car this-win-edges)
-					 (car next-win-edges))
-				     (<= (cadr this-win-edges)
-					 (cadr next-win-edges)))))
-	     (splitter
-	      (if (= (car this-win-edges)
-		     (car (window-edges (next-window))))
-		  'split-window-horizontally
-		'split-window-vertically)))
-	(delete-other-windows)
-	(let ((first-win (selected-window)))
-	  (funcall splitter)
-	  (if this-win-2nd (other-window 1))
-	  (set-window-buffer (selected-window) this-win-buffer)
-	  (set-window-buffer (next-window) next-win-buffer)
-	  (select-window first-win)
-	  (if this-win-2nd (other-window 1))))))
-(define-key ctl-x-4-map "t" 'toggle-window-split)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
